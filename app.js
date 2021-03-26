@@ -32,10 +32,22 @@ const library = [{
 ]
 
 const express = require('express');
+const bp = require('body-parser');
 const app = express();
+
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
 app.get("/introduction", (req, res) => {
     res.send("Hello World ");
 });
+
+app.post("/introduction", (req, res) => {
+    res.send("Hello World by post");
+    console.log(req.body);
+    console.log(req.body.name);
+    console.log(req.headers);
+    console.log(req.headers.header3);
+})
 
 app.listen(3005, () => console.log("Server is running"));
