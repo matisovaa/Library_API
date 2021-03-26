@@ -38,8 +38,9 @@ const app = express();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-app.get("/introduction", (req, res) => {
-    res.send("Hello World ");
+// Lists all books in book list
+app.get("/book", (req, res) => {
+    res.send(library);
 });
 
 app.post("/introduction", (req, res) => {
