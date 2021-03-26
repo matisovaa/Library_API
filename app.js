@@ -43,6 +43,11 @@ app.get("/book", (req, res) => {
     res.send(library);
 });
 
+// Find book by ID
+app.get("/book/:id", (req, res) => {
+    res.send(library[req.params.id]);
+});
+
 app.post("/introduction", (req, res) => {
     res.send("Hello World by post");
     console.log(req.body);
