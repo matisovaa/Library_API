@@ -58,7 +58,15 @@ app.get("/book", (req, res) => {
 
 // Find book by ID
 app.get("/book/:id", (req, res) => {
-    res.send(library[req.params.id]);
+    const book = library.find(book => book["id"] == req.params.id);
+    if (book) {
+        res.send(book);
+    } else if (isNaN(req.params.id) || req.params.id < 0) {
+        res.status(400).send("Invalid ID format supplied");
+    } else {
+        res.status(404).send("Book not found");
+    }
+
 });
 
 // Create new book
