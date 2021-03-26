@@ -59,14 +59,10 @@ app.get("/book/:id", (req, res) => {
     res.send(library[req.params.id]);
 });
 
-
-
-app.post("/introduction", (req, res) => {
-    res.send("Hello World by post");
-    console.log(req.body);
-    console.log(req.body.name);
-    console.log(req.headers);
-    console.log(req.headers.header3);
+// Create new book
+app.post("/book", (req, res) => {
+    library.push({...req.body, "id": 0 });
+    res.send(library[library.length - 1]);
 })
 
 app.listen(3005, () => console.log("Server is running"));
