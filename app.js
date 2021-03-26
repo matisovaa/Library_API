@@ -38,6 +38,17 @@ const app = express();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
+// Lists all tags in all books
+app.get("/book/tags", (req, res) => {
+    res.send(library.map(book => book["tags"]).flat()
+        // to remove duplication
+        .reduce((acc, tag) => {
+            return acc.some(tagFromAcc => tagFromAcc === tag) ?
+                acc : [...acc, tag]
+        }, [])
+    );
+});
+
 // Lists all books in book list
 app.get("/book", (req, res) => {
     res.send(library);
@@ -47,6 +58,8 @@ app.get("/book", (req, res) => {
 app.get("/book/:id", (req, res) => {
     res.send(library[req.params.id]);
 });
+
+
 
 app.post("/introduction", (req, res) => {
     res.send("Hello World by post");
