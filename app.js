@@ -31,6 +31,8 @@ const library = [{
     },
 ]
 
+let nextID = library.length;
+
 const express = require('express');
 const bp = require('body-parser');
 const app = express();
@@ -61,7 +63,8 @@ app.get("/book/:id", (req, res) => {
 
 // Create new book
 app.post("/book", (req, res) => {
-    library.push({...req.body, "id": 0 });
+    library.push({...req.body, "id": nextID });
+    nextID++;
     res.send(library[library.length - 1]);
 })
 
