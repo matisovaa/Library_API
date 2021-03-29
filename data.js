@@ -55,17 +55,25 @@ class Library {
         return this.library.find(book => book["id"] === idBook);
     }
 
-    addBook(book) {
+    isValidBook(book) {
         // check of required parameters
         if (typeof(book) !== "object" || book === null ||
             typeof(book["title"]) !== "string" ||
             typeof(book["author"]) !== "string" ||
             typeof(book["pages"]) !== "number") {
-            return null;
+            return false;
         }
         // check of optional parameters
         if ((book["tags"] && !Array.isArray(book["tags"])) ||
             (Array.isArray(book["tags"]) && !book["tags"].every(tag => (typeof(tag) === "string")))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    addBook(book) {
+        if (!this.isValidBook(book)) {
             return null;
         }
 
@@ -78,6 +86,32 @@ class Library {
         };
         this.library.push(newBook);
         return newBook;
+    }
+
+    updateBook(idBook, book) {
+        if (!this.isValidBook(book)) {
+            return null;
+        }
+
+        this.library[idBook]["title"] = book["title"];
+        this.library[idBook]["author"] = book["author"];
+        this.library[idBook]["pages"] = book["pages"];
+        if (book["tags"]) {
+            this.library[idBook]["tags"] = book["tags"]
+        }
+
+        return this.library[idBook];
+    }
+
+    deleteBook(idBook) {
+        const idxBook = this.library.findIndex(book => book["id"] === idBook);
+        // book with entered ID is not in list
+        if (idxBook === -1) {
+            return null;
+        }
+
+        const deletedBook = this.library.splice(idxBook, 1);
+        return deletedBook;
     }
 }
 
