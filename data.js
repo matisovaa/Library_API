@@ -102,6 +102,17 @@ class Library {
 
         return this.library[idBook];
     }
+
+    deleteBook(idBook) {
+        const idxBook = this.library.findIndex(book => book["id"] === idBook);
+        // book with entered ID is not in list
+        if (idxBook === -1) {
+            return null;
+        }
+
+        const deletedBook = this.library.splice(idxBook, 1);
+        return deletedBook;
+    }
 }
 
 module.exports = { Library }

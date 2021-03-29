@@ -69,4 +69,22 @@ app.put("/book/:id", (req, res) => {
     }
 })
 
+// Deletes a book
+app.delete("/book/:id", (req, res) => {
+
+    // test validity of ID
+    if (!/^[0-9]+$/.test(req.params.id)) {
+        res.status(400).send("Invalid ID format supplied");
+        return;
+    }
+
+    // ID is valid, we check if we have book with entered ID to delete
+    const book = library.deleteBook(+req.params.id);
+    if (book) {
+        res.send(book);
+    } else {
+        res.status(404).send("Book not found");
+    }
+});
+
 app.listen(3005, () => console.log("Server is running"));
