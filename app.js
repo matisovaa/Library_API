@@ -19,16 +19,16 @@ app.get("/book", (req, res) => {
 });
 
 // Find book by ID
-app.get("/book/:id", (req, res) => {
+app.get("/book/:bookId", (req, res) => {
 
     // test validity of ID
-    if (!/^[0-9]+$/.test(req.params.id)) {
+    if (!/^[0-9]+$/.test(req.params.bookId)) {
         res.status(400).send("Invalid ID format supplied");
         return;
     }
 
     // ID is valid, we check if we have book with entered ID
-    const book = library.getBook(+req.params.id);
+    const book = library.getBook(+req.params.bookId);
     if (book) {
         res.send(book);
     } else {
@@ -47,21 +47,21 @@ app.post("/book", (req, res) => {
 })
 
 // Update book by ID
-app.put("/book/:id", (req, res) => {
+app.put("/book/:bookId", (req, res) => {
 
     // test validity of ID
-    if (!/^[0-9]+$/.test(req.params.id)) {
+    if (!/^[0-9]+$/.test(req.params.bookId)) {
         res.status(400).send("Invalid ID format supplied");
         return;
     }
 
     // test if we have book with entered ID
-    if (!library.getBook(+req.params.id)) {
+    if (!library.getBook(+req.params.bookId)) {
         res.status(404).send("Book not found");
         return;
     }
 
-    const book = library.updateBook(+req.params.id, req.body);
+    const book = library.updateBook(+req.params.bookId, req.body);
     if (book) {
         res.send(book);
     } else {
@@ -70,16 +70,16 @@ app.put("/book/:id", (req, res) => {
 })
 
 // Deletes a book
-app.delete("/book/:id", (req, res) => {
+app.delete("/book/:bookId", (req, res) => {
 
     // test validity of ID
-    if (!/^[0-9]+$/.test(req.params.id)) {
+    if (!/^[0-9]+$/.test(req.params.bookId)) {
         res.status(400).send("Invalid ID format supplied");
         return;
     }
 
     // ID is valid, we check if we have book with entered ID to delete
-    const book = library.deleteBook(+req.params.id);
+    const book = library.deleteBook(+req.params.bookId);
     if (book) {
         res.send(book);
     } else {
