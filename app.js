@@ -2,11 +2,10 @@ const Library = require('./data');
 const library = new Library['Library']();
 
 const express = require('express');
-const bp = require('body-parser');
 const app = express();
 
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded());
 
 // Lists all tags in all books
 app.get("/book/tags", (req, res) => {
