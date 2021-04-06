@@ -6,7 +6,7 @@ const library = new Library();
 const routerBookId = express.Router();
 routerBookId.route("/book/:bookId")
     // Find book by ID
-    .get((req, res) => {
+    .get(async(req, res) => {
         // test validity of ID
         if (!/^[0-9]+$/.test(req.params.bookId)) {
             res.status(400).send("Invalid ID format supplied");
@@ -21,7 +21,7 @@ routerBookId.route("/book/:bookId")
         }
     })
     // Update book by ID
-    .put((req, res) => {
+    .put(async(req, res) => {
         // test validity of ID
         if (!/^[0-9]+$/.test(req.params.bookId)) {
             res.status(400).send("Invalid ID format supplied");
@@ -40,7 +40,7 @@ routerBookId.route("/book/:bookId")
         }
     })
     // Deletes a book
-    .delete((req, res) => {
+    .delete(async(req, res) => {
         // test validity of ID
         if (!/^[0-9]+$/.test(req.params.bookId)) {
             res.status(400).send("Invalid ID format supplied");
