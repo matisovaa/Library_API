@@ -1,5 +1,5 @@
 const Library = require('./data');
-const library = new Library['Library']();
+const library = new Library();
 
 const express = require('express');
 const app = express();
