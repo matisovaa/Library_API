@@ -1,7 +1,6 @@
 const express = require("express");
 
-const Library = require('./data');
-const library = new Library();
+const library = require('./data');
 
 const routerBookId = express.Router();
 routerBookId.route("/book/:bookId")

@@ -1,7 +1,6 @@
 const express = require("express");
 
-const Library = require('./data');
-const library = new Library();
+const library = require('./data');
 
 const routerBookTags = express.Router();
 routerBookTags.route("/book/tags")

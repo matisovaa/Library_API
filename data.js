@@ -112,4 +112,5 @@ class Library {
     }
 }
 
-module.exports = Library;
+const library = new Library();
+module.exports = library;
