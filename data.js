@@ -1,3 +1,5 @@
+const Joi = require('joi');
+
 class Library {
 
     constructor() {
@@ -56,20 +58,15 @@ class Library {
     }
 
     isValidBook(book) {
-        // check of required parameters
-        if (typeof(book) !== "object" || book === null ||
-            typeof(book["title"]) !== "string" ||
-            typeof(book["author"]) !== "string" ||
-            typeof(book["pages"]) !== "number") {
-            return false;
-        }
-        // check of optional parameters
-        if ((book["tags"] && !Array.isArray(book["tags"])) ||
-            (Array.isArray(book["tags"]) && !book["tags"].every(tag => (typeof(tag) === "string")))) {
-            return false;
-        }
 
-        return true;
+        const bookSchema = Joi.object({
+            title: Joi.string().required(),
+            author: Joi.string().required(),
+            pages: Joi.number().required(),
+            tags: Joi.array().items(Joi.string())
+        })
+
+        return bookSchema.validate(book).error ? false : true;
     }
 
     addBook(book) {
@@ -115,4 +112,5 @@ class Library {
     }
 }
 
-module.exports = { Library }
+const library = new Library();
+module.exports = library;
