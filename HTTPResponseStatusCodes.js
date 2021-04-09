@@ -1,0 +1,7 @@
+const BAD_REQUEST = 400;
+const NOT_FOUND = 404;
+const METHOD_NOT_ALLOWED = 405;
+
+module.exports.BAD_REQUEST = BAD_REQUEST;
+module.exports.NOT_FOUND = NOT_FOUND;
+module.exports.METHOD_NOT_ALLOWED = METHOD_NOT_ALLOWED;
