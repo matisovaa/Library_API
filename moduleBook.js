@@ -1,5 +1,6 @@
 const express = require("express");
 
+const HTTPResponseStatusCodes = require("./HTTPResponseStatusCodes");
 const library = require('./data');
 
 const routerBook = express.Router();
@@ -14,7 +15,8 @@ routerBook.route("/book")
         if (book) {
             res.send(book);
         } else {
-            res.status(405).send("New book not valid");
+            res.status(HTTPResponseStatusCodes.METHOD_NOT_ALLOWED)
+                .send("New book not valid");
         }
     })
 
