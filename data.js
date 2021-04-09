@@ -107,8 +107,7 @@ class Library {
             return null;
         }
 
-        const deletedBook = this.library.splice(idxBook, 1);
-        return deletedBook[0];
+        return this.library.splice(idxBook, 1)[0];
     }
 }
 
