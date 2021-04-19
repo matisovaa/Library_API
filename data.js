@@ -90,14 +90,15 @@ class Library {
             return null;
         }
 
-        this.library[idBook]["title"] = book["title"];
-        this.library[idBook]["author"] = book["author"];
-        this.library[idBook]["pages"] = book["pages"];
+        const updatedBook = this.getBook(idBook);
+        updatedBook["title"] = book["title"];
+        updatedBook["author"] = book["author"];
+        updatedBook["pages"] = book["pages"];
         if (book["tags"]) {
-            this.library[idBook]["tags"] = book["tags"]
+            updatedBook["tags"] = book["tags"]
         }
 
-        return this.library[idBook];
+        return updatedBook;
     }
 
     deleteBook(idBook) {
